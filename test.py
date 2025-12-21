@@ -25,9 +25,12 @@ genie.set_reference_audio(
     audio_text=os.path.splitext(os.path.basename(refer))[0],
 )
 
+t1 = time.time()
 genie.tts(
     character_name='emma',
     text='どうしようかな……やっぱりやりたいかも……！',
     play=False,
     save_path="./out.wav"
 )
+t2 = time.time()
+print(f"Time taken: {t2 - t1} seconds")
