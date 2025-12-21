@@ -11,6 +11,9 @@ UserData/
 GENIE_ENV/
 Deprecated/
 test/
+GPT-SoVITS/
+models/
+out.wav
 
 # Python
 __pycache__/
