@@ -29,6 +29,7 @@ t1 = time.time()
 genie.tts(
     character_name='emma',
     text='どうしようかな……やっぱりやりたいかも……！',
+    split_sentence=False,
     play=False,
     save_path="./out.wav"
 )

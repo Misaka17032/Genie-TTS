@@ -71,7 +71,9 @@ class GENIE:
             first_stage_decoder: ort.InferenceSession,
             stage_decoder: ort.InferenceSession,
     ) -> Optional[np.ndarray]:
-        """在CPU上运行T2S模型"""
+        import time
+        t_start = time.time()
+        
         # Encoder
         x, prompts = encoder.run(
             None,
@@ -83,6 +85,7 @@ class GENIE:
                 "ssl_content": ssl_content,
             },
         )
+        t_encoder = time.time()
 
         # First Stage Decoder
         y, y_emb, *present_key_values = first_stage_decoder.run(
@@ -105,6 +108,11 @@ class GENIE:
             if stop_condition_tensor:
                 break
 
+        t_end = time.time()
+        print(f"Latency Report (T2S):")
+        print(f"  Encoder: {t_encoder - t_start:.4f}s")
+        print(f"  Loop ({idx + 1} steps): {t_end - t_encoder:.4f}s")
+        print(f"  Total T2S: {t_end - t_start:.4f}s")
         y[0, -1] = 0
         return np.expand_dims(y[:, -idx:], axis=0)
 

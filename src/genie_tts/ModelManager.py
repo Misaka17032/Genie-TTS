@@ -122,7 +122,7 @@ class ModelManager:
         )
         self.character_to_language: Dict[str, str] = {}
         self.character_model_paths: Dict[str, str] = {}
-        self.providers = ["CPUExecutionProvider"]
+        self.providers = ["CUDAExecutionProvider", "CPUExecutionProvider"]
 
         self.cn_hubert: Optional[InferenceSession] = None
         self.speaker_verification_model: Optional[InferenceSession] = None
